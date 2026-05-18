@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Here — Delete Your Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --accent: #2d6a4f;
+    --accent-light: #d8f3dc;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --danger-border: #fecaca;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #e5e0d8;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(220,38,38,0.12) 0%, transparent 60%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(220,38,38,0.2);
+    border: 1px solid rgba(220,38,38,0.4);
+    border-radius: 100px;
+    padding: 4px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #fca5a5;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 6vw, 44px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+
+  .lang-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: center;
+  }
+  .lang-bar::-webkit-scrollbar { display: none; }
+  .lang-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover { color: var(--accent); }
+  .lang-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .warning-card {
+    background: var(--danger-light);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .warning-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .warning-card p {
+    font-size: 14px;
+    color: #7f1d1d;
+    line-height: 1.65;
+  }
+
+  .steps-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .steps-header {
+    background: #faf9f7;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px;
+  }
+  .steps-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+  }
+  .steps-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .step-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .step-content code {
+    display: inline-block;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 13px;
+    font-family: monospace;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+
+  .email-card {
+    background: var(--accent-light);
+    border: 1px solid #b7e4c7;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .email-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .email-card p {
+    font-size: 14px;
+    color: #2d6a4f;
+    line-height: 1.7;
+  }
+  .email-card a {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .what-deleted {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .what-deleted-header {
+    background: #faf9f7;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+  }
+  .deleted-list {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .deleted-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    color: #374151;
+  }
+  .deleted-item::before {
+    content: '✓';
+    color: var(--danger);
+    font-weight: 600;
+    font-size: 13px;
+    width: 18px;
+    flex-shrink: 0;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .footer strong { color: var(--accent); }
+
+  .lang-panel { display: none; }
+  .lang-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Data &amp; Privacy</div>
+  <h1>Delete Your Data</h1>
+  <div class="hero-sub">Just Here · Your data, your control</div>
+</div>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en', event)">🇺🇸 English</button>
+  <button class="lang-btn" onclick="setLang('vi', event)">🇻🇳 Tiếng Việt</button>
+  <button class="lang-btn" onclick="setLang('ja', event)">🇯🇵 日本語</button>
+  <button class="lang-btn" onclick="setLang('zh', event)">🇨🇳 中文</button>
+  <button class="lang-btn" onclick="setLang('ko', event)">🇰🇷 한국어</button>
+  <button class="lang-btn" onclick="setLang('id', event)">🇮🇩 Indonesia</button>
+</div>
+
+<div class="container">
+
+  <!-- ENGLISH -->
+  <div class="lang-panel active" id="panel-en">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>This action is permanent.</strong> Once your account and data are deleted, they cannot be recovered. Please make sure you want to proceed before submitting a request.</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>Delete from inside the app</h2>
+        <p>The fastest way — available directly in your account settings</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Open Just Here</h3><p>Launch the app and make sure you are logged in to the account you want to delete.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Go to Profile</h3><p>Tap your profile icon or navigate to the <strong>Profile</strong> tab at the bottom of the screen.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Open Settings</h3><p>Tap <strong>Settings</strong> (gear icon) in the top-right corner of your profile page.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Select "Delete Account"</h3><p>Scroll to the bottom of Settings and tap <strong>Delete Account</strong>. Confirm your choice when prompted.</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>Request via email</h3>
+      <p>If you cannot access the app, send a deletion request to <a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a> with the subject line <strong>"Data Deletion Request"</strong> and include the email address associated with your account. We will process your request within 30 days.</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">What gets deleted</div>
+      <div class="deleted-list">
+        <div class="deleted-item">Your account profile and login information</div>
+        <div class="deleted-item">All check-in records and mood history</div>
+        <div class="deleted-item">Reminder and notification settings</div>
+        <div class="deleted-item">Your emergency contact list</div>
+        <div class="deleted-item">Any feedback or messages you submitted</div>
+        <div class="deleted-item">All associated personal data on our servers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIETNAMESE -->
+  <div class="lang-panel" id="panel-vi">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>Hành động này không thể hoàn tác.</strong> Sau khi tài khoản và dữ liệu của bạn bị xóa, chúng tôi không thể khôi phục lại. Hãy chắc chắn bạn muốn tiếp tục trước khi gửi yêu cầu.</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>Xóa tài khoản trong ứng dụng</h2>
+        <p>Cách nhanh nhất — thực hiện ngay trong cài đặt tài khoản của bạn</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Mở Just Here</h3><p>Khởi động ứng dụng và đảm bảo bạn đang đăng nhập vào tài khoản muốn xóa.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Vào Trang cá nhân</h3><p>Nhấn vào biểu tượng hồ sơ hoặc chọn tab <strong>Trang cá nhân</strong> ở dưới cùng màn hình.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Mở Cài đặt</h3><p>Nhấn vào biểu tượng bánh răng <strong>Cài đặt</strong> ở góc trên bên phải trang cá nhân.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Chọn "Xóa tài khoản"</h3><p>Cuộn xuống cuối trang Cài đặt và nhấn <strong>Xóa tài khoản</strong>. Xác nhận lựa chọn khi được hỏi.</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>Gửi yêu cầu qua email</h3>
+      <p>Nếu bạn không thể truy cập ứng dụng, hãy gửi yêu cầu xóa dữ liệu đến <a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a> với tiêu đề <strong>"Data Deletion Request"</strong> kèm địa chỉ email đã đăng ký. Chúng tôi sẽ xử lý trong vòng 30 ngày.</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">Dữ liệu sẽ bị xóa</div>
+      <div class="deleted-list">
+        <div class="deleted-item">Hồ sơ tài khoản và thông tin đăng nhập</div>
+        <div class="deleted-item">Toàn bộ lịch sử check-in và tâm trạng</div>
+        <div class="deleted-item">Cài đặt nhắc nhở và thông báo</div>
+        <div class="deleted-item">Danh sách người liên hệ khẩn cấp</div>
+        <div class="deleted-item">Phản hồi hoặc tin nhắn bạn đã gửi</div>
+        <div class="deleted-item">Toàn bộ dữ liệu cá nhân trên máy chủ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAPANESE -->
+  <div class="lang-panel" id="panel-ja">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>この操作は元に戻せません。</strong> アカウントとデータが削除されると、復元することはできません。リクエストを送信する前に、十分ご確認ください。</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>アプリ内からアカウントを削除する</h2>
+        <p>最も簡単な方法 — アカウント設定から直接実行できます</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Just Here を開く</h3><p>アプリを起動し、削除したいアカウントでログインしていることを確認してください。</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>プロフィールへ移動</h3><p>プロフィールアイコンをタップするか、画面下部の<strong>プロフィール</strong>タブを選択してください。</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>設定を開く</h3><p>プロフィールページ右上の<strong>設定</strong>（歯車アイコン）をタップしてください。</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>「アカウントを削除」を選択</h3><p>設定の一番下までスクロールし、<strong>アカウントを削除</strong>をタップして確認してください。</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>メールでのリクエスト</h3>
+      <p>アプリにアクセスできない場合は、<a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a> 宛てに件名 <strong>"Data Deletion Request"</strong> で、登録済みのメールアドレスを添えてお送りください。30日以内に対応いたします。</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">削除されるデータ</div>
+      <div class="deleted-list">
+        <div class="deleted-item">アカウントプロフィールとログイン情報</div>
+        <div class="deleted-item">すべてのチェックイン記録と気分の履歴</div>
+        <div class="deleted-item">リマインダーと通知の設定</div>
+        <div class="deleted-item">緊急連絡先リスト</div>
+        <div class="deleted-item">送信したフィードバックやメッセージ</div>
+        <div class="deleted-item">サーバー上のすべての個人データ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHINESE -->
+  <div class="lang-panel" id="panel-zh">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>此操作不可撤销。</strong> 账户和数据一旦删除，将无法恢复。请在提交请求前确认你已做好准备。</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>在应用内删除账户</h2>
+        <p>最快捷的方式 — 直接在账户设置中操作</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>打开 Just Here</h3><p>启动应用，确保你已登录到想要删除的账户。</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>进入个人主页</h3><p>点击头像图标或屏幕底部的<strong>个人主页</strong>标签。</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>打开设置</h3><p>点击个人主页右上角的<strong>设置</strong>（齿轮图标）。</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>选择"删除账户"</h3><p>滚动到设置页底部，点击<strong>删除账户</strong>，并在弹窗中确认操作。</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>通过电子邮件提交请求</h3>
+      <p>如果无法访问应用，请发送删除请求至 <a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a>，邮件主题填写 <strong>"Data Deletion Request"</strong>，并注明你的注册邮箱。我们将在 30 天内处理。</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">将被删除的数据</div>
+      <div class="deleted-list">
+        <div class="deleted-item">账户资料和登录信息</div>
+        <div class="deleted-item">全部打卡记录和情绪历史</div>
+        <div class="deleted-item">提醒和通知设置</div>
+        <div class="deleted-item">紧急联系人列表</div>
+        <div class="deleted-item">你提交的任何反馈或消息</div>
+        <div class="deleted-item">服务器上所有相关个人数据</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KOREAN -->
+  <div class="lang-panel" id="panel-ko">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>이 작업은 되돌릴 수 없습니다.</strong> 계정과 데이터가 삭제되면 복구할 수 없습니다. 요청을 제출하기 전에 신중하게 확인해 주세요.</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>앱 내에서 계정 삭제</h2>
+        <p>가장 빠른 방법 — 계정 설정에서 바로 진행하세요</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Just Here 열기</h3><p>앱을 실행하고 삭제할 계정으로 로그인되어 있는지 확인하세요.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>프로필로 이동</h3><p>프로필 아이콘을 탭하거나 화면 하단의 <strong>프로필</strong> 탭을 선택하세요.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>설정 열기</h3><p>프로필 페이지 우측 상단의 <strong>설정</strong> (톱니바퀴 아이콘)을 탭하세요.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>"계정 삭제" 선택</h3><p>설정 하단까지 스크롤하여 <strong>계정 삭제</strong>를 탭하고, 확인 창에서 선택을 완료하세요.</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>이메일로 요청하기</h3>
+      <p>앱에 접근할 수 없는 경우 <a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a>으로 제목 <strong>"Data Deletion Request"</strong>와 함께 등록된 이메일 주소를 포함하여 삭제 요청을 보내주세요. 30일 이내에 처리해 드립니다.</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">삭제되는 데이터</div>
+      <div class="deleted-list">
+        <div class="deleted-item">계정 프로필 및 로그인 정보</div>
+        <div class="deleted-item">모든 체크인 기록 및 감정 히스토리</div>
+        <div class="deleted-item">알림 및 리마인더 설정</div>
+        <div class="deleted-item">긴급 연락처 목록</div>
+        <div class="deleted-item">제출한 피드백 또는 메시지</div>
+        <div class="deleted-item">서버에 저장된 모든 개인 데이터</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDONESIAN -->
+  <div class="lang-panel" id="panel-id">
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>Tindakan ini tidak dapat dibatalkan.</strong> Setelah akun dan datamu dihapus, tidak dapat dipulihkan kembali. Pastikan kamu yakin sebelum mengirimkan permintaan.</p>
+    </div>
+
+    <div class="steps-card">
+      <div class="steps-header">
+        <h2>Hapus akun dari dalam aplikasi</h2>
+        <p>Cara tercepat — tersedia langsung di pengaturan akunmu</p>
+      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Buka Just Here</h3><p>Jalankan aplikasi dan pastikan kamu sudah masuk ke akun yang ingin dihapus.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>Buka Profil</h3><p>Ketuk ikon profil atau navigasi ke tab <strong>Profil</strong> di bagian bawah layar.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Buka Pengaturan</h3><p>Ketuk <strong>Pengaturan</strong> (ikon gerigi) di pojok kanan atas halaman profil.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Pilih "Hapus Akun"</h3><p>Gulir ke bawah halaman Pengaturan dan ketuk <strong>Hapus Akun</strong>. Konfirmasi pilihanmu saat diminta.</p></div></div>
+    </div>
+
+    <div class="email-card">
+      <h3>Permintaan melalui email</h3>
+      <p>Jika kamu tidak dapat mengakses aplikasi, kirim permintaan penghapusan ke <a href="mailto:develop.antstudio@gmail.com">develop.antstudio@gmail.com</a> dengan subjek <strong>"Data Deletion Request"</strong> beserta alamat email yang terdaftar. Kami akan memprosesnya dalam 30 hari.</p>
+    </div>
+
+    <div class="what-deleted">
+      <div class="what-deleted-header">Data yang akan dihapus</div>
+      <div class="deleted-list">
+        <div class="deleted-item">Profil akun dan informasi login</div>
+        <div class="deleted-item">Semua catatan check-in dan riwayat suasana hati</div>
+        <div class="deleted-item">Pengaturan pengingat dan notifikasi</div>
+        <div class="deleted-item">Daftar kontak darurat</div>
+        <div class="deleted-item">Masukan atau pesan yang pernah kamu kirim</div>
+        <div class="deleted-item">Semua data pribadi terkait di server kami</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>Just Here</strong> · develop.antstudio@gmail.com · © 2026
+</div>
+
+<script>
+  function setLang(lang, e) {
+    document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + lang).classList.add('active');
+    e.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
