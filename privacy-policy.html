@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Here — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --accent: #2d6a4f;
+    --accent-light: #d8f3dc;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #e5e0d8;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100px;
+    padding: 4px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 6vw, 44px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-top: 8px;
+  }
+
+  .lang-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: center;
+  }
+  .lang-bar::-webkit-scrollbar { display: none; }
+  .lang-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover { color: var(--accent); }
+  .lang-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .intro-card {
+    background: var(--accent-light);
+    border: 1px solid #b7e4c7;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-card .date-row {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .intro-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .intro-card p {
+    font-size: 14px;
+    color: #2d6a4f;
+    line-height: 1.75;
+  }
+
+  .section {
+    margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    background: #faf9f7;
+  }
+  .section-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text);
+  }
+  .section-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .section-body p {
+    font-size: 14.5px;
+    color: #374151;
+    line-height: 1.78;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent-light);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .footer strong { color: var(--accent); }
+
+  .lang-panel { display: none; }
+  .lang-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="hero-sub" id="hero-sub">Just Here · Effective 25/03/2026</div>
+</div>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
+  <button class="lang-btn" onclick="setLang('vi')">🇻🇳 Tiếng Việt</button>
+  <button class="lang-btn" onclick="setLang('ja')">🇯🇵 日本語</button>
+  <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+  <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
+  <button class="lang-btn" onclick="setLang('id')">🇮🇩 Indonesia</button>
+</div>
+
+<div class="container">
+
+  <!-- ENGLISH -->
+  <div class="lang-panel active" id="panel-en">
+    <div class="intro-card">
+      <div class="date-row">Effective date · 25/03/2026</div>
+      <h2>Our privacy commitment</h2>
+      <p>Just Here respects your personal data. This policy explains how the app collects, uses, stores, and protects information when you sign in, track your mood check-ins, manage contacts, or use related support features.</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. Information we collect</h3></div><div class="section-body"><p>We may collect account information such as your display name, email address, profile image, or identifiers provided by sign-in services like Google, Apple, Facebook, or Zalo.</p><p>When you use the app, we may store check-in records, reminder preferences, notification settings, language choices, device details, and technical data required to keep the service working properly.</p><p>If you choose to add contacts or send feedback, we process the information you submit for the purpose of providing that feature.</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. How we use information</h3></div><div class="section-body"><p>We use information to create and maintain your account, sync your data across devices, display your check-in history, and personalize your in-app experience.</p><p>We also use data to send reminders, support users, diagnose technical issues, improve reliability, and help protect the app and its users.</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. How data is shared</h3></div><div class="section-body"><p>We do not sell your personal data. Information is shared only when necessary with service providers that help us offer sign-in, cloud storage, notifications, or error monitoring.</p><p>We may also disclose limited information when required by law or when needed to protect the rights, property, or safety of users and the service.</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. Storage and security</h3></div><div class="section-body"><p>We use reasonable technical and organizational safeguards to protect data from unauthorized access, loss, misuse, alteration, or disclosure.</p><p>We keep information for as long as needed to provide the service, meet legal obligations, and resolve legitimate disputes.</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. Your choices and rights</h3></div><div class="section-body"><p>You can update some information inside the app, change language settings, manage notification permissions, or request account deletion if you no longer want to use the service.</p><p>Depending on where you live, you may also have rights to request access to, correction of, deletion of, or restriction of processing for your personal data.</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. Children's data</h3></div><div class="section-body"><p>The app is not specifically designed for children. If you believe a child has provided personal data without appropriate consent, please contact us so we can review and address the situation.</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. Policy updates</h3></div><div class="section-body"><p>We may update this Privacy Policy from time to time to reflect feature changes, operational updates, or legal requirements. When material changes are made, we will update the effective date and may provide additional notice in the app.</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. Contact us</h3></div><div class="section-body"><p>If you have questions about privacy or want to submit a request related to your personal data, please contact the Just Here support team through the support channel available in the app.</p></div></div>
+  </div>
+
+  <!-- VIETNAMESE -->
+  <div class="lang-panel" id="panel-vi">
+    <div class="intro-card">
+      <div class="date-row">Ngày hiệu lực · 25/03/2026</div>
+      <h2>Cam kết về quyền riêng tư</h2>
+      <p>Just Here tôn trọng dữ liệu cá nhân của bạn. Chính sách này giải thích cách ứng dụng thu thập, sử dụng, lưu trữ và bảo vệ thông tin khi bạn đăng nhập, check-in cảm xúc, quản lý liên hệ hoặc sử dụng các tính năng hỗ trợ khác.</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. Thông tin chúng tôi thu thập</h3></div><div class="section-body"><p>Chúng tôi có thể thu thập thông tin tài khoản như tên hiển thị, email, ảnh đại diện hoặc mã định danh từ các nhà cung cấp đăng nhập như Google, Apple, Facebook hoặc Zalo.</p><p>Khi bạn sử dụng ứng dụng, chúng tôi có thể lưu dữ liệu check-in, lịch nhắc, cài đặt thông báo, ngôn ngữ, thông tin thiết bị và dữ liệu kỹ thuật cần thiết để vận hành ổn định.</p><p>Nếu bạn chủ động thêm người liên hệ hoặc gửi phản hồi, chúng tôi sẽ xử lý những thông tin bạn cung cấp cho mục đích đúng với tính năng đó.</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. Cách chúng tôi sử dụng thông tin</h3></div><div class="section-body"><p>Thông tin được sử dụng để tạo và duy trì tài khoản, đồng bộ dữ liệu giữa các thiết bị, hiển thị lịch sử check-in và cá nhân hóa trải nghiệm trong ứng dụng.</p><p>Chúng tôi cũng dùng dữ liệu để gửi thông báo nhắc nhở, hỗ trợ người dùng, xử lý lỗi kỹ thuật, cải thiện hiệu năng và bảo vệ an toàn cho hệ thống.</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. Chia sẻ dữ liệu</h3></div><div class="section-body"><p>Chúng tôi không bán dữ liệu cá nhân của bạn. Dữ liệu chỉ được chia sẻ khi cần thiết với các nhà cung cấp dịch vụ hỗ trợ đăng nhập, lưu trữ đám mây, gửi thông báo hoặc phân tích lỗi.</p><p>Trong trường hợp pháp luật yêu cầu hoặc để bảo vệ quyền, tài sản và sự an toàn của người dùng, chúng tôi có thể phải tiết lộ một phần thông tin liên quan.</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. Lưu trữ và bảo mật</h3></div><div class="section-body"><p>Chúng tôi áp dụng các biện pháp hợp lý về kỹ thuật và tổ chức để bảo vệ dữ liệu khỏi truy cập trái phép, mất mát, thay đổi hoặc tiết lộ không phù hợp.</p><p>Dữ liệu được lưu trong khoảng thời gian cần thiết để cung cấp dịch vụ, đáp ứng nghĩa vụ pháp lý và giải quyết tranh chấp hợp lệ.</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. Quyền và lựa chọn của bạn</h3></div><div class="section-body"><p>Bạn có thể cập nhật một số thông tin trong ứng dụng, thay đổi ngôn ngữ, quản lý quyền thông báo hoặc yêu cầu xóa tài khoản nếu không muốn tiếp tục sử dụng dịch vụ.</p><p>Tùy nơi bạn cư trú, bạn có thể có thêm quyền yêu cầu truy cập, chỉnh sửa, xóa hoặc hạn chế xử lý dữ liệu cá nhân của mình.</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. Dữ liệu trẻ em</h3></div><div class="section-body"><p>Ứng dụng không được thiết kế riêng cho trẻ em. Nếu bạn tin rằng dữ liệu của trẻ em đã được cung cấp cho chúng tôi mà không có sự đồng ý phù hợp, vui lòng liên hệ để chúng tôi xem xét và xử lý.</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. Cập nhật chính sách</h3></div><div class="section-body"><p>Chúng tôi có thể cập nhật Chính sách bảo mật theo thời gian để phản ánh thay đổi về tính năng, quy trình vận hành hoặc yêu cầu pháp lý. Khi có thay đổi quan trọng, chúng tôi sẽ cập nhật ngày hiệu lực và có thể thông báo thêm trong ứng dụng.</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. Liên hệ</h3></div><div class="section-body"><p>Nếu bạn có câu hỏi về quyền riêng tư hoặc muốn gửi yêu cầu liên quan đến dữ liệu cá nhân, vui lòng liên hệ đội ngũ hỗ trợ của Just Here qua kênh hỗ trợ được cung cấp trong ứng dụng.</p></div></div>
+  </div>
+
+  <!-- JAPANESE -->
+  <div class="lang-panel" id="panel-ja">
+    <div class="intro-card">
+      <div class="date-row">施行日 · 25/03/2026</div>
+      <h2>プライバシーに関するお約束</h2>
+      <p>Just Here はあなたの個人データを大切にします。本ポリシーでは、サインイン、気分チェックイン、連絡先の管理、関連機能の利用時に、アプリがどのように情報を収集、利用、保存、保護するかを説明します。</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. 収集する情報</h3></div><div class="section-body"><p>Google、Apple、Facebook、Zalo などのサインインサービスを通じて提供される表示名、メールアドレス、プロフィール画像、識別子などのアカウント情報を収集することがあります。</p><p>アプリ利用時には、チェックイン記録、リマインダー設定、通知設定、言語設定、端末情報、安定したサービス提供に必要な技術データを保存することがあります。</p><p>連絡先の追加やフィードバック送信を選択した場合、その機能を提供する目的で入力された情報を処理します。</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. 情報の利用方法</h3></div><div class="section-body"><p>情報は、アカウントの作成と維持、端末間のデータ同期、チェックイン履歴の表示、アプリ体験のパーソナライズのために利用されます。</p><p>また、リマインダー送信、ユーザーサポート、技術的な問題の診断、信頼性の向上、アプリとユーザーの保護のためにも利用します。</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. データ共有</h3></div><div class="section-body"><p>当社はあなたの個人データを販売しません。情報は、サインイン、クラウド保存、通知、エラー監視を支援するサービス提供者に必要な範囲でのみ共有されます。</p><p>法令に基づく場合、またはユーザーやサービスの権利、財産、安全を守るために必要な場合には、限定的な情報を開示することがあります。</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. 保存と安全管理</h3></div><div class="section-body"><p>不正アクセス、紛失、誤用、改ざん、不適切な開示からデータを守るため、合理的な技術的・組織的保護措置を講じています。</p><p>情報は、サービス提供、法的義務の履行、正当な紛争解決に必要な期間保持されます。</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. あなたの選択と権利</h3></div><div class="section-body"><p>アプリ内で一部の情報を更新したり、言語設定を変更したり、通知権限を管理したり、不要になった場合にアカウント削除を依頼したりできます。</p><p>お住まいの地域によっては、個人データへのアクセス、訂正、削除、処理制限を求める権利を有する場合があります。</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. 子どものデータ</h3></div><div class="section-body"><p>本アプリは子ども向けに特化して設計されていません。適切な同意なく子どもが個人データを提供したと思われる場合は、確認と対応のためご連絡ください。</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. ポリシーの更新</h3></div><div class="section-body"><p>機能変更、運用上の更新、法的要件に応じて、本プライバシーポリシーを随時更新することがあります。重要な変更がある場合は施行日を更新し、必要に応じてアプリ内で追加のお知らせを行います。</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. お問い合わせ</h3></div><div class="section-body"><p>プライバシーに関する質問や個人データに関する依頼がある場合は、アプリ内のサポート窓口から Just Here サポートチームへご連絡ください。</p></div></div>
+  </div>
+
+  <!-- CHINESE -->
+  <div class="lang-panel" id="panel-zh">
+    <div class="intro-card">
+      <div class="date-row">生效日期 · 25/03/2026</div>
+      <h2>我们的隐私承诺</h2>
+      <p>Just Here 尊重你的个人数据。本政策说明当你登录、记录情绪打卡、管理联系人或使用相关支持功能时，应用如何收集、使用、存储并保护这些信息。</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. 我们收集的信息</h3></div><div class="section-body"><p>我们可能会收集账户信息，例如显示名称、电子邮箱、头像，或由 Google、Apple、Facebook、Zalo 等登录服务提供的标识信息。</p><p>当你使用应用时，我们可能会存储打卡记录、提醒偏好、通知设置、语言选择、设备信息，以及维持服务正常运行所需的技术数据。</p><p>如果你选择添加联系人或发送反馈，我们会为提供该功能而处理你提交的信息。</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. 我们如何使用信息</h3></div><div class="section-body"><p>这些信息用于创建和维护你的账户、在设备间同步数据、显示打卡历史，并为你提供更个性化的应用体验。</p><p>我们也会使用这些数据发送提醒、提供支持、诊断技术问题、提升稳定性，并帮助保护应用及其用户。</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. 数据如何共享</h3></div><div class="section-body"><p>我们不会出售你的个人数据。只有在提供登录、云存储、通知或错误监控所必需时，信息才会与相关服务提供商共享。</p><p>在法律要求的情况下，或为了保护用户和服务的权利、财产与安全时，我们也可能披露有限的信息。</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. 存储与安全</h3></div><div class="section-body"><p>我们采取合理的技术和组织措施，以保护数据免遭未经授权的访问、丢失、滥用、篡改或披露。</p><p>我们会在提供服务、履行法律义务和解决合理争议所需的期限内保留相关信息。</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. 你的选择与权利</h3></div><div class="section-body"><p>你可以在应用中更新部分信息、修改语言设置、管理通知权限，或在不再使用服务时请求删除账户。</p><p>根据你所在地区的法律，你还可能拥有请求访问、更正、删除或限制处理你个人数据的权利。</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. 儿童数据</h3></div><div class="section-body"><p>本应用并非专为儿童设计。如果你认为儿童在未经适当同意的情况下提供了个人数据，请联系我们，以便我们进行核查并妥善处理。</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. 政策更新</h3></div><div class="section-body"><p>我们可能会不时更新本隐私政策，以反映功能变化、运营调整或法律要求。若发生重大变更，我们将更新生效日期，并可能在应用内提供额外通知。</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. 联系我们</h3></div><div class="section-body"><p>如果你对隐私有疑问，或希望提交与个人数据相关的请求，请通过应用中提供的支持渠道联系 Just Here 支持团队。</p></div></div>
+  </div>
+
+  <!-- KOREAN -->
+  <div class="lang-panel" id="panel-ko">
+    <div class="intro-card">
+      <div class="date-row">시행일 · 25/03/2026</div>
+      <h2>개인정보 보호 약속</h2>
+      <p>Just Here는 사용자의 개인 데이터를 존중합니다. 이 정책은 로그인, 감정 체크인 기록, 연락처 관리, 관련 지원 기능 이용 시 앱이 정보를 어떻게 수집, 사용, 저장, 보호하는지 설명합니다.</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. 수집하는 정보</h3></div><div class="section-body"><p>Google, Apple, Facebook, Zalo 등의 로그인 서비스를 통해 제공되는 이름, 이메일, 프로필 이미지, 식별자와 같은 계정 정보를 수집할 수 있습니다.</p><p>앱을 사용할 때 체크인 기록, 알림 설정, 언어 설정, 기기 정보, 서비스 운영에 필요한 기술 데이터를 저장할 수 있습니다.</p><p>연락처를 추가하거나 피드백을 보낼 경우, 해당 기능을 제공하기 위해 제출한 정보를 처리합니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. 정보의 사용 방법</h3></div><div class="section-body"><p>정보는 계정 생성과 유지, 기기 간 데이터 동기화, 체크인 기록 표시, 맞춤형 앱 경험 제공을 위해 사용됩니다.</p><p>또한 알림 전송, 사용자 지원, 기술 문제 진단, 안정성 개선, 앱과 사용자의 보호를 위해서도 사용됩니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. 데이터 공유</h3></div><div class="section-body"><p>당사는 사용자의 개인 데이터를 판매하지 않습니다. 정보는 로그인, 클라우드 저장, 알림, 오류 모니터링을 지원하는 서비스 제공업체와 필요한 경우에만 공유됩니다.</p><p>법률상 요구되거나 사용자와 서비스의 권리, 재산, 안전을 보호하기 위해 필요한 경우 제한된 정보를 공개할 수 있습니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. 저장 및 보안</h3></div><div class="section-body"><p>무단 접근, 손실, 오용, 변경, 부적절한 공개로부터 데이터를 보호하기 위해 합리적인 기술적·조직적 보호 조치를 적용합니다.</p><p>정보는 서비스 제공, 법적 의무 이행, 정당한 분쟁 해결에 필요한 기간 동안 보관됩니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. 사용자의 선택과 권리</h3></div><div class="section-body"><p>앱 내에서 일부 정보를 업데이트하고, 언어 설정을 변경하고, 알림 권한을 관리하거나, 더 이상 서비스를 원하지 않을 경우 계정 삭제를 요청할 수 있습니다.</p><p>거주 지역에 따라 개인 데이터에 대한 접근, 정정, 삭제 또는 처리 제한을 요청할 권리가 추가로 보장될 수 있습니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. 아동 데이터</h3></div><div class="section-body"><p>이 앱은 아동을 위해 특별히 설계되지 않았습니다. 적절한 동의 없이 아동이 개인 데이터를 제공했다고 생각되면, 검토와 조치를 위해 저희에게 연락해 주세요.</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. 정책 업데이트</h3></div><div class="section-body"><p>기능 변경, 운영 업데이트 또는 법적 요구 사항을 반영하기 위해 본 개인정보처리방침을 수시로 업데이트할 수 있습니다. 중요한 변경이 있을 경우 시행일을 갱신하고 앱 내에서 추가 안내를 제공할 수 있습니다.</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. 문의하기</h3></div><div class="section-body"><p>개인정보 관련 문의나 개인 데이터와 관련된 요청이 있는 경우 앱에 제공된 지원 채널을 통해 Just Here 지원팀에 연락해 주세요.</p></div></div>
+  </div>
+
+  <!-- INDONESIAN -->
+  <div class="lang-panel" id="panel-id">
+    <div class="intro-card">
+      <div class="date-row">Tanggal berlaku · 25/03/2026</div>
+      <h2>Komitmen privasi kami</h2>
+      <p>Just Here menghormati data pribadimu. Kebijakan ini menjelaskan bagaimana aplikasi mengumpulkan, menggunakan, menyimpan, dan melindungi informasi saat kamu masuk, melacak check-in suasana hati, mengelola kontak, atau menggunakan fitur dukungan terkait.</p>
+    </div>
+    <div class="section"><div class="section-header"><h3>1. Informasi yang kami kumpulkan</h3></div><div class="section-body"><p>Kami dapat mengumpulkan informasi akun seperti nama tampilan, alamat email, foto profil, atau identitas yang diberikan oleh layanan masuk seperti Google, Apple, Facebook, atau Zalo.</p><p>Saat kamu menggunakan aplikasi, kami dapat menyimpan catatan check-in, preferensi pengingat, pengaturan notifikasi, pilihan bahasa, detail perangkat, dan data teknis yang dibutuhkan agar layanan berjalan dengan baik.</p><p>Jika kamu memilih menambahkan kontak atau mengirim masukan, kami memproses informasi yang kamu kirim untuk menyediakan fitur tersebut.</p></div></div>
+    <div class="section"><div class="section-header"><h3>2. Cara kami menggunakan informasi</h3></div><div class="section-body"><p>Kami menggunakan informasi untuk membuat dan memelihara akunmu, menyinkronkan data di berbagai perangkat, menampilkan riwayat check-in, dan mempersonalisasi pengalamanmu di aplikasi.</p><p>Kami juga menggunakan data untuk mengirim pengingat, mendukung pengguna, mendiagnosis masalah teknis, meningkatkan keandalan, dan membantu melindungi aplikasi serta penggunanya.</p></div></div>
+    <div class="section"><div class="section-header"><h3>3. Cara data dibagikan</h3></div><div class="section-body"><p>Kami tidak menjual data pribadimu. Informasi hanya dibagikan jika diperlukan kepada penyedia layanan yang membantu kami menyediakan login, penyimpanan cloud, notifikasi, atau pemantauan error.</p><p>Kami juga dapat mengungkapkan informasi terbatas jika diwajibkan oleh hukum atau diperlukan untuk melindungi hak, properti, atau keselamatan pengguna dan layanan.</p></div></div>
+    <div class="section"><div class="section-header"><h3>4. Penyimpanan dan keamanan</h3></div><div class="section-body"><p>Kami menggunakan perlindungan teknis dan organisasi yang wajar untuk melindungi data dari akses tidak sah, kehilangan, penyalahgunaan, perubahan, atau pengungkapan.</p><p>Kami menyimpan informasi selama diperlukan untuk menyediakan layanan, memenuhi kewajiban hukum, dan menyelesaikan sengketa yang sah.</p></div></div>
+    <div class="section"><div class="section-header"><h3>5. Pilihan dan hakmu</h3></div><div class="section-body"><p>Kamu dapat memperbarui sebagian informasi di dalam aplikasi, mengubah pengaturan bahasa, mengelola izin notifikasi, atau meminta penghapusan akun jika tidak lagi ingin menggunakan layanan.</p><p>Bergantung pada tempat tinggalmu, kamu juga mungkin memiliki hak untuk meminta akses, perbaikan, penghapusan, atau pembatasan pemrosesan data pribadimu.</p></div></div>
+    <div class="section"><div class="section-header"><h3>6. Data anak</h3></div><div class="section-body"><p>Aplikasi ini tidak dirancang khusus untuk anak-anak. Jika kamu yakin seorang anak telah memberikan data pribadi tanpa persetujuan yang sesuai, silakan hubungi kami agar kami dapat meninjau dan menanganinya.</p></div></div>
+    <div class="section"><div class="section-header"><h3>7. Pembaruan kebijakan</h3></div><div class="section-body"><p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan fitur, pembaruan operasional, atau persyaratan hukum. Jika ada perubahan material, kami akan memperbarui tanggal berlaku dan dapat memberikan pemberitahuan tambahan di aplikasi.</p></div></div>
+    <div class="section"><div class="section-header"><h3>8. Hubungi kami</h3></div><div class="section-body"><p>Jika kamu memiliki pertanyaan tentang privasi atau ingin mengajukan permintaan terkait data pribadimu, silakan hubungi tim dukungan Just Here melalui saluran dukungan yang tersedia di aplikasi.</p></div></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>Just Here</strong> · develop.antstudio@gmail.com · © 2026
+</div>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + lang).classList.add('active');
+    event.target.classList.add('active');
+    const labels = {
+      en: 'Just Here · Effective 25/03/2026',
+      vi: 'Just Here · Ngày hiệu lực 25/03/2026',
+      ja: 'Just Here · 施行日 25/03/2026',
+      zh: 'Just Here · 生效日期 25/03/2026',
+      ko: 'Just Here · 시행일 25/03/2026',
+      id: 'Just Here · Tanggal berlaku 25/03/2026',
+    };
+    document.getElementById('hero-sub').textContent = labels[lang];
+  }
+</script>
+</body>
+</html>
